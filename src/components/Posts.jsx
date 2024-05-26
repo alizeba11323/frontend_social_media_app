@@ -3,13 +3,13 @@ import Post from "./Post";
 import usePost from "../store/post.store";
 import { useEffect } from "react";
 import { DotLoader } from "react-spinners";
+
 const Posts = ({ handleEditOpen }) => {
   const { posts, loading, getAllPosts } = usePost((state) => ({
     posts: state.posts,
     loading: state.loading,
     getAllPosts: state.getAllPosts,
   }));
-  console.log(posts);
   useEffect(() => {
     const getPosts = async () => {
       await getAllPosts();

@@ -90,32 +90,23 @@ function Post({ post, handleEditOpen }) {
           </Text>
         </VStack>
         <Box flex="1"></Box>
-        <Menu>
-          <MenuButton>
-            <Icon as={IoEllipsisVerticalSharp} h="4" w="4" />
-          </MenuButton>
-          <MenuList>
-            {post?.creator?._id?.toString() === myInfo?._id?.toString() && (
-              <>
-                {" "}
-                <MenuItem onClick={() => handleEditOpen(post)}>
-                  <Icon as={FiEdit} h="4" w="4" />{" "}
-                  <Text ml="2"> Edit Post</Text>
-                </MenuItem>
-                <MenuItem onClick={() => DeletePost(post._id)}>
-                  <Icon as={IoTrashBinOutline} h="4" w="4" />{" "}
-                  <Text ml="2"> Delete Post</Text>
-                </MenuItem>
-              </>
-            )}
-
-            <MenuDivider />
-            <MenuItem onClick={() => handleCopyLink(post?._id)}>
-              <Icon as={IoCopyOutline} h="4" w="4" />{" "}
-              <Text ml="2"> Copy Post Link</Text>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        {post?.creator?._id?.toString() === myInfo?._id?.toString() && (
+          <Menu>
+            <MenuButton>
+              <Icon as={IoEllipsisVerticalSharp} h="4" w="4" />
+            </MenuButton>
+            <MenuList>
+              {" "}
+              <MenuItem onClick={() => handleEditOpen(post)}>
+                <Icon as={FiEdit} h="4" w="4" /> <Text ml="2"> Edit Post</Text>
+              </MenuItem>
+              <MenuItem onClick={() => DeletePost(post._id)}>
+                <Icon as={IoTrashBinOutline} h="4" w="4" />{" "}
+                <Text ml="2"> Delete Post</Text>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        )}
       </Box>
       <Text>
         {!show ? post?.body.slice(0, 100) : post?.body}{" "}

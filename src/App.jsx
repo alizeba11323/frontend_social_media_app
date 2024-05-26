@@ -18,6 +18,8 @@ import SinglePost from "./pages/SinglePost";
 
 import { socket } from "./socketsclient";
 import usePost from "./store/post.store";
+import useMessageStore from "./store/message.store";
+import AudioNoti from "./assets/noti.mp3";
 function App() {
   console.log(import.meta.env.BASE_URL);
   const { likeDislike } = usePost((state) => ({
@@ -37,6 +39,9 @@ function App() {
     authenticated: state.authenticated,
     addNotification: state.addNotification,
     myInfo: state.myInfo,
+  }));
+  const { setOnlineUsers } = useMessageStore((state) => ({
+    setOnlineUsers: state.setOnlineUsers,
   }));
   const toast = useToast();
   useEffect(() => {
@@ -59,6 +64,8 @@ function App() {
   }, []);
   useEffect(() => {
     socket.on("notification", (message) => {
+      const audio = new Audio(AudioNoti);
+      audio.play();
       addNotification(message);
     });
   }, []);
@@ -86,6 +93,14 @@ function App() {
       clearMessage();
     }
   }, [errorMessage, successMessage]);
+  useEffect(() => {
+    socket.on("online-users", (users) => {
+      setOnlineUsers(users);
+    });
+    return () => {
+      socket.off("online-users");
+    };
+  }, []);
   return (
     <Box as="main" display={"flex"} w="100vw" h="100vh">
       <Routes>

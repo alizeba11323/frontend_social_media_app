@@ -57,7 +57,7 @@ function SideBar() {
       <Flex flexDir={"column"} gap="1">
         <Box display={"flex"} alignItems={"center"} gap="3" mb="4" ml="2">
           <Avatar size={"md"} name={myInfo.name} src={myInfo?.avatar?.url} />
-          <VStack spacing={1}>
+          <VStack spacing={1} alignItems={"flex-start"}>
             <Text fontSize={"md"} size={"md"}>
               {myInfo?.name}
             </Text>

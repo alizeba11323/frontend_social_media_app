@@ -4,72 +4,105 @@ import { devtools } from "zustand/middleware";
 const useMessageStore = create(
   devtools((set) => ({
     messages: [],
+    conversations: [],
+    onlineUsers: [],
+    chatSelected: null,
+    setOnlineUsers: (users) => {
+      set((state) => ({
+        ...state,
+        onlineUsers: users,
+      }));
+    },
+    setConversations: (conversations) => {
+      set((state) => ({
+        ...state,
+        conversations,
+      }));
+    },
+    setMessages: (messages) => {
+      set((state) => ({
+        ...state,
+        messages,
+      }));
+    },
+
+    setChatSelected: (conversation) => {
+      set((state) => ({
+        ...state,
+        chatSelected: conversation,
+      }));
+    },
     createMessage: (message) => {
       set((state) => {
-        const findConversation = state.messages.find(
-          (msg) => msg[message?.conversation._id]
-        );
-        let newMessages;
-        if (findConversation) {
-          newMessages = state.messages?.map((msg) => {
-            const conversationId = msg[message?.conversation._id];
-            if (conversationId) {
-              return {
-                [message?.conversation._id]: [
-                  ...msg[message?.conversation._id],
-                  message,
-                ],
-              };
+        if (state.chatSelected.initialCreate) {
+          const findC = state.conversations.map((conversation) => {
+            if (
+              (conversation.recipients[0]._id.toString() ===
+                message?.sender._id.toString() &&
+                conversation.recipients[1]._id.toString() ===
+                  message?.reciever._id.toString()) ||
+              (conversation.recipients[0]._id.toString() ===
+                message?.reciever._id.toString() &&
+                conversation.recipients[1]._id.toString() ===
+                  message?.sender._id.toString())
+            ) {
+              return message.conversation;
             }
-            return msg;
+            return conversation;
           });
-        } else {
-          newMessages = [
-            ...state.messages,
-            { [message?.conversation?._id]: [message] },
-          ];
-        }
-
-        return {
-          ...state,
-          messages: newMessages,
-        };
-      });
-    },
-    getAllMessages: (conversationId, messages) => {
-      if (conversationId === null) {
-        set((state) => ({
-          ...state,
-          messages,
-        }));
-      } else {
-        set((state) => {
-          let newMessages;
-          const findConversation = state.messages.find(
-            (msg) => msg[conversationId]
-          );
-          if (findConversation) {
-            newMessages = state.messages?.map((msg) => {
-              if (msg[conversationId]) {
-                return {
-                  [conversationId]: [...messages],
-                };
-              }
-              return msg;
-            });
-          } else {
-            newMessages = [
-              ...state.messages,
-              { [conversationId]: [...messages] },
-            ];
-          }
-
           return {
             ...state,
-            messages: newMessages,
+            conversations: findC,
+            chatSelected: message.conversation,
+            messages: [...state.messages, message],
           };
-        });
-      }
+        } else {
+          const conversations = state.conversations?.map((conv) =>
+            conv._id?.toString() === message.conversation?._id.toString()
+              ? message.conversation
+              : conv
+          );
+          return {
+            ...state,
+            conversations,
+            chatSelected: message.conversation,
+            messages: [...state.messages, message],
+          };
+        }
+      });
+    },
+    createConversation: (recipients) => {
+      set((state) => {
+        const findC = state.conversations.find(
+          (conversation) =>
+            (conversation.recipients[0]._id.toString() ===
+              recipients[0]._id.toString() &&
+              conversation.recipients[1]._id.toString() ===
+                recipients[1]._id.toString()) ||
+            (conversation.recipients[0]._id.toString() ===
+              recipients[1]._id.toString() &&
+              conversation.recipients[1]._id.toString() ===
+                recipients[0]._id.toString())
+        );
+        if (!findC) {
+          return {
+            ...state,
+            conversations: [
+              ...state.conversations,
+              {
+                _id: "fake_id" + new Date().toISOString(),
+                recipients,
+                text: "",
+                media: "",
+                initialCreate: true,
+              },
+            ],
+          };
+        }
+        return {
+          ...state,
+        };
+      });
     },
   }))
 );
