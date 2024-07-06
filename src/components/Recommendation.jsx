@@ -107,8 +107,7 @@ function Recommendation() {
           {users.map((user) => (
             <Box
               key={user?._id}
-              sx={{ border: "1px solid #21253a" }}
-              shadow="lg"
+              sx={{ boxShadow: "0 0 2px 2px rgba(0,0,0,0.1)" }}
               py="4"
               px="8"
               borderRadius={"5"}

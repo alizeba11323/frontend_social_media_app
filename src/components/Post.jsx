@@ -6,21 +6,19 @@ import {
   Image,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
   Tag,
   Text,
+  useColorMode,
   VStack,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import moment from "moment";
 import {
-  IoArrowRedoOutline,
   IoBookmarkOutline,
   IoBookmarkSharp,
   IoChatbubbleEllipsesOutline,
-  IoCopyOutline,
   IoEllipsisVerticalSharp,
   IoHeart,
   IoHeartOutline,
@@ -31,11 +29,12 @@ import Comments from "./Comments";
 import { useState } from "react";
 import useAuth from "../store/auth.store";
 import usePost from "../store/post.store";
-import { BASE_URL, PatchData } from "../../fetchData/fetch.api";
+import { PatchData } from "../../fetchData/fetch.api";
 import { socket } from "../socketsclient";
 import { useNavigate } from "react-router-dom";
 
 function Post({ post, handleEditOpen }) {
+  const { colorMode } = useColorMode();
   const [showComment, setShowComment] = useState(false);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -43,14 +42,12 @@ function Post({ post, handleEditOpen }) {
     myInfo: state.myInfo,
     handlePostSave: state.handlePostSave,
   }));
-  const { deletePost, likeDislike, copyPostLink, handleError } = usePost(
-    (state) => ({
-      deletePost: state.deletePost,
-      likeDislike: state.handleLike,
-      copyPostLink: state.copyPostLink,
-      handleError: state.handleError,
-    })
-  );
+  const { deletePost, likeDislike, handleError } = usePost((state) => ({
+    deletePost: state.deletePost,
+    likeDislike: state.handleLike,
+    copyPostLink: state.copyPostLink,
+    handleError: state.handleError,
+  }));
   const handleShowComment = () => {
     setShowComment((prev) => !prev);
   };
@@ -69,14 +66,12 @@ function Post({ post, handleEditOpen }) {
       handleError(err);
     }
   };
-  const handleCopyLink = async (postId) => {
-    await copyPostLink(`${import.meta.env.VITE_BASE_URL}/posts/${postId}`);
-  };
+
   return (
     <Box
       p="4"
       borderRadius="8"
-      background={"gray.900"}
+      background={colorMode === "light" ? "gray.100" : "gray.900"}
       display="flex"
       flexDirection={"column"}
       gap="4"
@@ -85,7 +80,10 @@ function Post({ post, handleEditOpen }) {
         <Avatar src={post?.creator?.avatar?.url} />
         <VStack spacing="0" alignItems={"flex-start"}>
           <Text fontSize="md">{post?.creator?.name}</Text>
-          <Text fontSize="sm" color="purple.100">
+          <Text
+            fontSize="sm"
+            color={colorMode === "light" ? "purple.300" : "purple.100"}
+          >
             {moment(post?.createdAt).fromNow()}
           </Text>
         </VStack>
@@ -122,7 +120,12 @@ function Post({ post, handleEditOpen }) {
       </Text>
       <HStack spacing="2">
         {post?.tags?.map((tag) => (
-          <Tag key={tag}>#{tag}</Tag>
+          <Tag
+            key={tag}
+            bgColor={colorMode === "light" ? "gray.300" : "gray.700"}
+          >
+            #{tag}
+          </Tag>
         ))}
       </HStack>
       <Image

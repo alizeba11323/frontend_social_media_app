@@ -17,13 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import moment from "moment";
-import {
-  IoArrowBack,
-  IoArrowUndoOutline,
-  IoClose,
-  IoSearchOutline,
-  IoSend,
-} from "react-icons/io5";
+import { IoArrowBack, IoClose, IoSearchOutline, IoSend } from "react-icons/io5";
 import { ImAttachment } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -209,6 +203,7 @@ function Chat() {
               </Box>
               {searchUsers.length > 0 && (
                 <Box
+                  color={"white"}
                   width="100%"
                   h="min-content"
                   position={"absolute"}
@@ -298,6 +293,7 @@ function Chat() {
                   alignItems="center"
                   p="2"
                   px="3"
+                  color={"white"}
                   cursor={"pointer"}
                   bgColor={
                     chatSelected?._id?.toString() ===
@@ -350,7 +346,9 @@ function Chat() {
               alignItems={"center"}
               justifyContent="center"
             >
-              <Text fontSize="2xl">Select Chat To Chat With Your Friends</Text>
+              <Text fontSize="2xl" color="white">
+                Select Chat To Chat With Your Friends
+              </Text>
             </Box>
           ) : (
             <>
@@ -381,7 +379,7 @@ function Chat() {
                   }
                 />
                 <VStack spacing="0" alignItems={"flex-start"}>
-                  <Text>
+                  <Text color={"white"}>
                     {
                       chatSelected.recipients[
                         chatSelected.recipients.findIndex(
@@ -453,7 +451,9 @@ function Chat() {
                         : "flex-start"
                     }
                   >
-                    <Text fontSize="sm">{message?.text}</Text>
+                    <Text fontSize="sm" color="white">
+                      {message?.text}
+                    </Text>
 
                     <Text fontSize="x-small" color="white" textAlign={"right"}>
                       {moment(message?.createdAt).format("LT")}

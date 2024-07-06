@@ -45,7 +45,7 @@ const theme = extendTheme({
     global: (props) => ({
       body: {
         fontFamily: "Poppins",
-        color: mode("gray.800", "whiteAlpha.900")(props),
+        color: mode("gray.500", "whiteAlpha.900")(props),
         bg: mode("white", "gray.800")(props),
       },
       a: {

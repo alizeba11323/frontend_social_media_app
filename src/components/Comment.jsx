@@ -8,13 +8,13 @@ import {
   TagLabel,
   Text,
   Textarea,
+  useColorMode,
 } from "@chakra-ui/react";
 import moment from "moment";
 import { FiEdit } from "react-icons/fi";
 import { IoHeart, IoHeartOutline, IoTrash } from "react-icons/io5";
 import useAuth from "../store/auth.store";
 import { useState } from "react";
-import useComment from "../store/comment.store";
 
 function Comment({
   comment,
@@ -24,6 +24,7 @@ function Comment({
   createCommentFunc,
   tag,
 }) {
+  const { colorMode } = useColorMode();
   const [edit, setIsEdit] = useState(false);
   const [reply, setReply] = useState(false);
   const [editComment, setEditComment] = useState("");
@@ -43,7 +44,11 @@ function Comment({
     setReplyComment("");
   };
   return (
-    <Box bg="gray.800" p="4" borderRadius={"4"}>
+    <Box
+      background={colorMode === "light" ? "gray.200" : "gray.800"}
+      p="4"
+      borderRadius={"4"}
+    >
       <HStack justifyContent={"space-between"}>
         <Box display={"flex"} gap="2" alignItems={"center"}>
           <Avatar src={comment?.user?.avatar?.url} size="sm" />
@@ -96,7 +101,7 @@ function Comment({
       )}
 
       <Box display="flex" gap="8" fontSize={"sm"}>
-        <Box as="span" color="gray.300">
+        <Box as="span" color="gray.400">
           {moment(comment.createdAt).fromNow()}
         </Box>
         <Box as="span" display="flex" alignItems={"center"} gap="1">

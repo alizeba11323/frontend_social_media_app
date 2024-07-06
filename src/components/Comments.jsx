@@ -1,11 +1,12 @@
-import { Box, Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input, useColorMode } from "@chakra-ui/react";
 import Comment from "./Comment";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useComment from "../store/comment.store";
-import { BeatLoader, ScaleLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import { socket } from "../socketsclient";
 import useAuth from "../store/auth.store";
 function Comments({ showComment, postId, comments, post }) {
+  const { colorMode } = useColorMode();
   const [comment, setComment] = useState("");
   const [IsFetchAgain, setIsFetchAgain] = useState(false);
   const { myInfo } = useAuth((state) => ({ myInfo: state.myInfo }));
@@ -80,6 +81,12 @@ function Comments({ showComment, postId, comments, post }) {
         <Input
           type="text"
           variant={"filled"}
+          sx={{
+            shadow:
+              colorMode === "light"
+                ? "0 0 1px 1px lightgray"
+                : "0 0 1px 1px rgba(0,0,0,0.1)",
+          }}
           placeholder="Enter Comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}

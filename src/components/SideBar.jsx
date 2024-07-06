@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   Icon,
   Text,
@@ -15,12 +16,14 @@ import {
   IoSettingsOutline,
   IoLogOutOutline,
   IoChatbubblesSharp,
+  IoSunnyOutline,
+  IoMoonOutline,
 } from "react-icons/io5";
 import { MdOutlineExplore } from "react-icons/md";
 import useAuth from "../store/auth.store";
 import { useLocation, useNavigate } from "react-router-dom";
 function SideBar() {
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
@@ -40,6 +43,7 @@ function SideBar() {
       height="100vh"
       bgColor={colorMode === "dark" ? "gray.900" : "white"}
       p={2}
+      boxShadow={"md"}
       flexDir={"column"}
     >
       <Box
@@ -61,11 +65,19 @@ function SideBar() {
             <Text fontSize={"md"} size={"md"}>
               {myInfo?.name}
             </Text>
-            <Text fontSize={"xs"} color={"purple.100"}>
+            <Text fontSize={"xs"} color={"purple.200"}>
               @{myInfo?.username}
             </Text>
           </VStack>
           <Box flex="1"></Box>
+          <Button
+            size={"xs"}
+            variant="outline"
+            cursor={"pointer"}
+            onClick={toggleColorMode}
+          >
+            {colorMode === "light" ? <IoMoonOutline /> : <IoSunnyOutline />}
+          </Button>
         </Box>
         <Box
           onClick={() => navigate(`/`)}
@@ -84,7 +96,7 @@ function SideBar() {
           _hover={{ bgColor: "purple.500", color: "white" }}
         >
           <Icon as={IoHomeOutline} h={6} w={6} />
-          <Text color="white">Home</Text>
+          Home
         </Box>
         <Box
           onClick={() => navigate(`/chat`)}
@@ -103,7 +115,7 @@ function SideBar() {
           _hover={{ bgColor: "purple.500", color: "white" }}
         >
           <Icon as={IoChatbubblesOutline} h={6} w={6} />
-          <Text color="white">Chat</Text>
+          Chat
         </Box>
         <Box
           onClick={() => navigate(`/explore`)}
@@ -122,7 +134,7 @@ function SideBar() {
           _hover={{ bgColor: "purple.500", color: "white" }}
         >
           <Icon as={MdOutlineExplore} h={6} w={6} />
-          <Text color="white">Explore</Text>
+          Explore
         </Box>
         <Box
           display="flex"
@@ -142,7 +154,7 @@ function SideBar() {
         >
           <Box display="flex" gap="4">
             <Icon as={IoNotificationsOutline} h={6} w={6} />
-            <Text color="white">Notification</Text>
+            Notification
           </Box>
           <Box
             fontSize="12px"
@@ -172,7 +184,7 @@ function SideBar() {
           _hover={{ bgColor: "purple.500", color: "white" }}
         >
           <Icon as={IoLogOutOutline} h={6} w={6} />
-          <Text color="white">Logout</Text>
+          Logout
         </Box>
         <Box position="relative" width="100%">
           <Box
@@ -192,7 +204,7 @@ function SideBar() {
             _hover={{ bgColor: "purple.500", color: "white" }}
           >
             <Icon as={IoSettingsOutline} h={6} w={6} />
-            <Text color="white">Profile</Text>
+            Profile
           </Box>
         </Box>
       </Box>

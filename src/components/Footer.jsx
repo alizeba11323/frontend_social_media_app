@@ -18,7 +18,7 @@ function Footer() {
       bottom={0}
       left={0}
       width="100%"
-      h="80px"
+      h="50px"
     >
       <Box
         bgColor={"purple.500"}

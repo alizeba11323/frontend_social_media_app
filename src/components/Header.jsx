@@ -18,7 +18,7 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import useAuth from "../store/auth.store";
 import { useNavigate } from "react-router-dom";
 function Header() {
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
   const { myInfo, logoutUser, notifications } = useAuth((state) => ({
     myInfo: state.myInfo,
@@ -85,6 +85,9 @@ function Header() {
           <MenuList>
             <MenuItem onClick={() => navigate(`/profile/${myInfo?._id}`)}>
               Profile
+            </MenuItem>
+            <MenuItem onClick={toggleColorMode}>
+              {colorMode === "light" ? "Dark Mode" : "Light Mode"}
             </MenuItem>
             <MenuDivider />
             <MenuItem onClick={handleLogout}>Logout</MenuItem>

@@ -205,6 +205,7 @@ function UserProfile() {
             px="10"
             bg={selectedButton === "posts" ? "purple.700" : "gray.900"}
             borderRadius="8"
+            color={"white"}
             borderEndRadius={"0"}
             _hover={{
               backgroundColor: "purple.700",
@@ -223,6 +224,7 @@ function UserProfile() {
             px="10"
             bg={selectedButton === "liked_posts" ? "purple.700" : "gray.900"}
             borderRadius={"8"}
+            color={"white"}
             borderStartRadius={"0"}
             _hover={{
               backgroundColor: "purple.700",
@@ -266,10 +268,10 @@ function UserProfile() {
                     p="4"
                   >
                     <HStack spacing="1">
-                      <Icon as={IoHeartOutline} w="5" h="5" />
+                      <Icon as={IoHeartOutline} w="5" h="5" color="gray.100" />
                       <Text fontSize={"sm"}>{sPost?.likes?.length}</Text>
                     </HStack>
-                    <Icon as={IoBookmarkSharp} w="5" h="5" />
+                    <Icon as={IoBookmarkSharp} w="5" h="5" color="gray.100" />
                   </Box>
                 </Box>
               ))

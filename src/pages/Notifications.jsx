@@ -1,8 +1,16 @@
-import { Avatar, AvatarBadge, Box, Text, VStack } from "@chakra-ui/react";
+import {
+  Avatar,
+  AvatarBadge,
+  Box,
+  Text,
+  useColorMode,
+  VStack,
+} from "@chakra-ui/react";
 import useAuth from "../store/auth.store";
 import moment from "moment";
 
 function Notifications() {
+  const { colorMode } = useColorMode();
   const { notifications, makeAsRead } = useAuth((state) => ({
     notifications: state.notifications,
     makeAsRead: state.makeAsRead,
@@ -13,7 +21,7 @@ function Notifications() {
       display={"flex"}
       flexDirection={"column"}
       width={{ base: "95%", md: "60%", lg: "50%" }}
-      bgColor="gray.700"
+      bgColor={colorMode === "light" ? "gray.50" : "gray.700"}
       marginLeft={"auto"}
       marginRight={"auto"}
       borderRadius={"10"}

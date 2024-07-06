@@ -12,7 +12,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IoAdd, IoCloseOutline } from "react-icons/io5";
 
 import uploadImage from "../assets/upload_image.png";
