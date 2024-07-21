@@ -110,15 +110,6 @@ const useAuth = create(
           } catch (err) {
             console.log(err);
             console.log(err.response?.data);
-            set((state) => ({
-              ...state,
-              loading: false,
-              authenticated: false,
-              successMessage: "Your Token Expired,Login Again",
-              token: "",
-              myInfo: "",
-              chatUsers: [],
-            }));
           }
         },
         updateProfile: async (user) => {
@@ -190,6 +181,17 @@ const useAuth = create(
               errorMessage: err?.response?.data?.message,
             }));
           }
+        },
+        logoutSession: async () => {
+          set((state) => ({
+            ...state,
+            loading: false,
+            authenticated: false,
+            successMessage: "Your Token Expired,Login Again",
+            token: "",
+            myInfo: "",
+            chatUsers: [],
+          }));
         },
         FollowUnFollowUser: async (id) => {
           set((state) => ({ ...state, loading: true }));
