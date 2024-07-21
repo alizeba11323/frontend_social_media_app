@@ -1,7 +1,8 @@
 import { Box, Image } from "@chakra-ui/react";
+import { Outlet } from "react-router-dom";
 import sideImg from "../assets/side-img.avif";
 
-function AuthLayout({ children }) {
+function AuthLayout() {
   return (
     <>
       <Box
@@ -13,7 +14,7 @@ function AuthLayout({ children }) {
         flexDir={"column"}
         py={10}
       >
-        {children}
+        <Outlet />
       </Box>
       {sideImg && (
         <Image

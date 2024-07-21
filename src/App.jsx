@@ -105,96 +105,24 @@ function App() {
   return (
     <Box as="main" display={"flex"} w="100vw" h="100vh">
       <Routes>
-        <Route
-          path="/chat"
-          element={
-            <ProtectedLayout>
-              <Chat />
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/explore"
-          element={
-            <ProtectedLayout>
-              <MainLayout>
-                <Explore />
-              </MainLayout>
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedLayout>
-              <MainLayout>
-                <Notifications />
-              </MainLayout>
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <ProtectedLayout>
-              <MainLayout>
-                <Users />
-              </MainLayout>
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/profile/:id"
-          element={
-            <ProtectedLayout>
-              <MainLayout>
-                <UserProfile />
-              </MainLayout>
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/posts/:id"
-          element={
-            <ProtectedLayout>
-              <MainLayout>
-                <SinglePost />
-              </MainLayout>
-            </ProtectedLayout>
-          }
-        />
-
-        <Route
-          path="/"
-          element={
-            <ProtectedLayout>
-              <HomeLayout>
-                <Home />
-              </HomeLayout>
-            </ProtectedLayout>
-          }
-        />
-
-        <Route
-          path="/login"
-          element={
-            <ProtectedLayout>
-              <AuthLayout>
-                <Login />
-              </AuthLayout>
-            </ProtectedLayout>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <ProtectedLayout>
-              <AuthLayout>
-                <Register />
-              </AuthLayout>
-            </ProtectedLayout>
-          }
-        />
+        <Route element={<ProtectedLayout />}>
+          <Route path="/chat" element={<Chat />} />
+          <Route element={<MainLayout />}>
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/profile/:id" element={<UserProfile />} />
+            <Route path="/posts/:id" element={<SinglePost />} />
+          </Route>
+          <Route path="/" element={<HomeLayout />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Route>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </Box>
   );

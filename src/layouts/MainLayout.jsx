@@ -1,9 +1,10 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
+import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function MainLayout({ children }) {
+function MainLayout() {
   return (
     <Box w="100vw" h="100vh">
       <Header />
@@ -13,7 +14,7 @@ function MainLayout({ children }) {
         </GridItem>
         <GridItem colSpan={{ base: 12, lg: 9 }}>
           <Box as="section" h="100vh" overflowY={"scroll"}>
-            {children}
+            <Outlet />
           </Box>
         </GridItem>
       </Grid>
