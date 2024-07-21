@@ -118,9 +118,9 @@ function App() {
             <Route index element={<Home />} />
           </Route>
         </Route>
-        <Route path="/auth" element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/chat" element={<Chat />} />
       </Routes>

@@ -180,7 +180,7 @@ function Register() {
             Register
           </Button>
           <Text mt="0" textAlign={"center"} letterSpacing={1}>
-            Already have an account? <Link to="/auth/login">Login</Link>
+            Already have an account? <Link to="/login">Login</Link>
           </Text>
         </VStack>
       </Box>
