@@ -187,7 +187,17 @@ const useAuth = create(
             ...state,
             loading: false,
             authenticated: false,
-            successMessage: "Your Token Expired,Login Again",
+            errorMessage: "Your Token Expired.Login Again",
+            token: "",
+            myInfo: "",
+            chatUsers: [],
+          }));
+        },
+        logoutSessionUser: async () => {
+          set((state) => ({
+            ...state,
+            loading: false,
+            authenticated: false,
             token: "",
             myInfo: "",
             chatUsers: [],

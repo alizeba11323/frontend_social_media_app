@@ -25,14 +25,13 @@ const debounceFunction = (fn, wait) => {
 };
 function Recommendation() {
   const navigate = useNavigate();
-  const { myInfo, clearMessage, FollowUnFollowUser, logoutSession } = useAuth(
-    (state) => ({
+  const { myInfo, clearMessage, FollowUnFollowUser, logoutSessionUser } =
+    useAuth((state) => ({
       FollowUnFollowUser: state.FollowUnFollowUser,
       clearMessage: state.clearMessage,
       myInfo: state.myInfo,
-      logoutSession: state.logoutSession,
-    })
-  );
+      logoutSessionUser: state.logoutSessionUser,
+    }));
   const [users, setUsers] = useState([]);
   const [value, setValue] = useState("");
   const handleFollow = async (user) => {
@@ -47,7 +46,7 @@ function Recommendation() {
       const res = await GetData("/users/get-users");
       setUsers(res.data.users);
     } catch (err) {
-      logoutSession();
+      logoutSessionUser();
       console.log(err.message);
     }
   };
