@@ -107,22 +107,67 @@ function App() {
       <Routes>
         <Route element={<ProtectedLayout />}>
           <Route path="/chat" element={<Chat />} />
-          <Route element={<MainLayout />}>
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/profile/:id" element={<UserProfile />} />
-            <Route path="/posts/:id" element={<SinglePost />} />
-          </Route>
+          <Route
+            path="/explore"
+            element={
+              <MainLayout>
+                <Explore />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/notifications"
+            element={
+              <MainLayout>
+                <Notifications />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <MainLayout>
+                <Users />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/profile/:id"
+            element={
+              <MainLayout>
+                <UserProfile />
+              </MainLayout>
+            }
+          />
+          <Route
+            path="/posts/:id"
+            element={
+              <MainLayout>
+                <SinglePost />
+              </MainLayout>
+            }
+          />
           <Route path="/" element={<HomeLayout />}>
             <Route index element={<Home />} />
           </Route>
         </Route>
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-        <Route path="/chat" element={<Chat />} />
+
+        <Route
+          path="/login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <AuthLayout>
+              <Register />
+            </AuthLayout>
+          }
+        />
       </Routes>
     </Box>
   );
