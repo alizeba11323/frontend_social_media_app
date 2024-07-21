@@ -21,6 +21,7 @@ import usePost from "./store/post.store";
 import useMessageStore from "./store/message.store";
 import AudioNoti from "./assets/noti.mp3";
 function App() {
+  console.log(document.cookie);
   console.log(import.meta.env.BASE_URL);
   const { likeDislike } = usePost((state) => ({
     likeDislike: state.handleLike,

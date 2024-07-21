@@ -9,7 +9,7 @@ function ProtectedLayout() {
   if (authenticated) {
     return <Outlet />;
   }
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/login" />;
 }
 
 export default ProtectedLayout;
