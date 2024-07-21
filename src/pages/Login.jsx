@@ -87,7 +87,7 @@ function Login() {
             Login
           </Button>
           <Text textAlign={"center"} letterSpacing={1}>
-            Don`t have an account? <Link to="/register">Register</Link>
+            Don`t have an account? <Link to="/auth/register">Register</Link>
           </Text>
         </VStack>
       </Box>

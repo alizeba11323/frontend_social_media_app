@@ -34,7 +34,7 @@ function SideBar() {
   }));
   const handleLogout = async () => {
     await logoutUser();
-    navigate("/login", { replace: true });
+    navigate("/auth/login", { replace: true });
   };
   return (
     <Box
