@@ -119,8 +119,8 @@ function App() {
           </Route>
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
         <Route path="/chat" element={<Chat />} />
       </Routes>
