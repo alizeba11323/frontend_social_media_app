@@ -105,73 +105,94 @@ function App() {
   return (
     <Box as="main" display={"flex"} w="100vw" h="100vh">
       <Routes>
-        <Route element={<ProtectedLayout />}>
-          <Route path="/chat" element={<Chat />} />
-          <Route
-            path="/explore"
-            element={
+        <Route
+          path="/chat"
+          element={
+            <ProtectedLayout>
+              <Chat />
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <ProtectedLayout>
               <MainLayout>
                 <Explore />
               </MainLayout>
-            }
-          />
-          <Route
-            path="/notifications"
-            element={
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedLayout>
               <MainLayout>
                 <Notifications />
               </MainLayout>
-            }
-          />
-          <Route
-            path="/users"
-            element={
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <ProtectedLayout>
               <MainLayout>
                 <Users />
               </MainLayout>
-            }
-          />
-          <Route
-            path="/profile/:id"
-            element={
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path="/profile/:id"
+          element={
+            <ProtectedLayout>
               <MainLayout>
                 <UserProfile />
               </MainLayout>
-            }
-          />
-          <Route
-            path="/posts/:id"
-            element={
+            </ProtectedLayout>
+          }
+        />
+        <Route
+          path="/posts/:id"
+          element={
+            <ProtectedLayout>
               <MainLayout>
                 <SinglePost />
               </MainLayout>
-            }
-          />
+            </ProtectedLayout>
+          }
+        />
 
-          <Route
-            path="/"
-            element={
+        <Route
+          path="/"
+          element={
+            <ProtectedLayout>
               <HomeLayout>
                 <Home />
               </HomeLayout>
-            }
-          />
-        </Route>
+            </ProtectedLayout>
+          }
+        />
 
         <Route
           path="/login"
           element={
-            <AuthLayout>
-              <Login />
-            </AuthLayout>
+            <ProtectedLayout>
+              <AuthLayout>
+                <Login />
+              </AuthLayout>
+            </ProtectedLayout>
           }
         />
         <Route
           path="/register"
           element={
-            <AuthLayout>
-              <Register />
-            </AuthLayout>
+            <ProtectedLayout>
+              <AuthLayout>
+                <Register />
+              </AuthLayout>
+            </ProtectedLayout>
           }
         />
       </Routes>

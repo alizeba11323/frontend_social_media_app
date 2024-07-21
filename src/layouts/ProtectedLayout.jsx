@@ -1,13 +1,13 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useAuth from "../store/auth.store";
 
-function ProtectedLayout() {
+function ProtectedLayout({ children }) {
   console.log(document.cookie);
   const { authenticated } = useAuth((state) => ({
     authenticated: state.authenticated,
   }));
   if (authenticated) {
-    return <Outlet />;
+    return children;
   }
   return <Navigate to="/login" />;
 }
