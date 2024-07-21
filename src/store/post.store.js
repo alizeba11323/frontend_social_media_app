@@ -6,6 +6,7 @@ import {
   PatchData,
   PostData,
 } from "../../fetchData/fetch.api";
+import useAuth from "./auth.store";
 
 const usePost = create(
   devtools((set) => ({
@@ -141,11 +142,13 @@ const usePost = create(
           posts: res.data.posts,
         }));
       } catch (err) {
-        set((state) => ({
-          ...state,
-          loading: false,
-          errorMessage: err.response.data.message || err.message,
-        }));
+        err.response.data.message === "Token Not Found"
+          ? useAuth.getState().logoutSession()
+          : set((state) => ({
+              ...state,
+              loading: false,
+              errorMessage: err.response.data.message || err.message,
+            }));
       }
     },
   }))
