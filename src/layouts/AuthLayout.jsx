@@ -16,14 +16,16 @@ function AuthLayout() {
       >
         <Outlet />
       </Box>
-      <Image
-        src={sideImg}
-        display={{ base: "none", lg: "block" }}
-        h={"100vh"}
-        w="50%"
-        objectFit={"cover"}
-        bgRepeat={"no-repeat"}
-      />
+      {sideImg && (
+        <Image
+          src={sideImg}
+          display={{ base: "none", lg: "block" }}
+          h={"100vh"}
+          w="50%"
+          objectFit={"cover"}
+          bgRepeat={"no-repeat"}
+        />
+      )}
     </>
   );
 }
