@@ -110,6 +110,15 @@ const useAuth = create(
           } catch (err) {
             console.log(err);
             console.log(err.response?.data);
+            set((state) => ({
+              ...state,
+              loading: false,
+              authenticated: false,
+              successMessage: "Your Token Expired,Login Again",
+              token: "",
+              myInfo: "",
+              chatUsers: [],
+            }));
           }
         },
         updateProfile: async (user) => {
