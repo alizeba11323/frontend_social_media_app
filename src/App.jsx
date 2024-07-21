@@ -147,9 +147,15 @@ function App() {
               </MainLayout>
             }
           />
-          <Route path="/" element={<HomeLayout />}>
-            <Route index element={<Home />} />
-          </Route>
+
+          <Route
+            path="/"
+            element={
+              <HomeLayout>
+                <Home />
+              </HomeLayout>
+            }
+          />
         </Route>
 
         <Route
